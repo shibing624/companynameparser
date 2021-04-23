@@ -31,7 +31,7 @@ setup(
     long_description_content_type='text/markdown',
     author='XuMing',
     author_email='xuming624@qq.com',
-    url='https://github.com/shibing624/companyparser',
+    url='https://github.com/shibing624/companynameparser',
     license="Apache License 2.0",
     classifiers=[
         'Intended Audience :: Developers',
