@@ -5,7 +5,7 @@
 """
 import argparse
 
-import companyparser
+import companynameparser
 
 
 def parse(names):
@@ -15,7 +15,7 @@ def parse(names):
     :return: list of place, brand, trade, suffix
     """
     result = []
-    df = companyparser.parse(names)
+    df = companynameparser.parse(names)
 
     for map_key in zip(df["place"], df["brand"], df["trade"], df["suffix"]):
         result.append('\t'.join([map_key[0], map_key[1], map_key[2], map_key[3]]))

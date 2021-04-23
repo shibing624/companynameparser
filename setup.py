@@ -7,7 +7,7 @@ import sys
 
 from setuptools import setup, find_packages
 
-import companyparser
+import companynameparser
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -24,8 +24,8 @@ with open('requirements.txt', 'r', encoding='utf-8') as f:
     reqs = f.read()
 
 setup(
-    name='companyparser',
-    version=companyparser.__version__,
+    name='companynameparser',
+    version=companynameparser.__version__,
     description='Chinese Company Name Parser and Extraction Tool,Company name Recognition Utilities',
     long_description=readme,
     long_description_content_type='text/markdown',
@@ -51,9 +51,9 @@ setup(
     keywords='NLP,Simplified Chinese,Chinese geographic information',
     install_requires=reqs.strip().split('\n'),
     packages=find_packages(exclude=['tests']),
-    package_dir={'companyparser': 'companyparser'},
+    package_dir={'companynameparser': 'companynameparser'},
     package_data={
-        'companyparser': ['*.*', '../LICENSE', '../*.txt', '../README.*'],
+        'companynameparser': ['*.*', '../LICENSE', '../*.txt', '../README.*'],
     },
     test_suite='tests',
 )

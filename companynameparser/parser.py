@@ -8,8 +8,8 @@ import os
 
 import pandas as pd
 
-from companyparser.logger import logger
-from companyparser.tokenizer import segment
+from companynameparser.logger import logger
+from companynameparser.tokenizer import segment
 
 pwd_path = os.path.abspath(os.path.dirname(__file__))
 # 地址文件
@@ -59,7 +59,7 @@ def findall(string, s):
     return res
 
 
-class NameParser:
+class Parser:
     """
     Name Parser for Company Name
     """
@@ -151,7 +151,7 @@ class NameParser:
 
 
 if __name__ == '__main__':
-    m = NameParser()
+    m = Parser()
     a = [
         "灵动生物科技（舟山）有限公司（北京）分公司",
         "北京华颜健康咨询有限公司",

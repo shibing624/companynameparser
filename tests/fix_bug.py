@@ -14,7 +14,7 @@
 # 钟楼区北港可诺丹婷美容院 北港可诺
 # 南京市江北新区春之燕美容店 江北新区
 
-from companyparser import nameparser
+from companynameparser import parser
 
 a = [
     "兰州壹玖壹玖电子商务有限公司",
@@ -48,7 +48,7 @@ def load_file():
 if __name__ == '__main__':
     b = load_file()
     a = a + b
-    m = nameparser.NameParser()
+    m = parser.Parser()
     df = m.parse(a)
     for i, b in zip(df['input'], df['brand']):
         print(i, b)

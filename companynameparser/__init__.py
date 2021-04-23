@@ -4,11 +4,11 @@
 @description: 
 """
 
-from companyparser import nameparser
-from companyparser.nameparser import NameParser
+from companynameparser import parser
+from companynameparser.parser import Parser
 
 __version__ = "0.1.1"
 
-np = NameParser()
+np = Parser()
 parse = np.parse
 parse_one = np.parse_one
