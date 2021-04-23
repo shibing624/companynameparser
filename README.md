@@ -1,4 +1,4 @@
-# companyparser
+# companynameparser
 company name parser, extract company name brand. 中文公司名称分词工具，支持公司名称中的地名，品牌名（主词），行业词，公司名后缀提取。
 
 # Feature
@@ -13,11 +13,11 @@ company name parser, extract company name brand. 中文公司名称分词工具�
 
 # Install
 
-- 全自动安装：pip install companyparser
+- 全自动安装：pip install companynameparser
 - 半自动安装：
 ```
-git clone https://github.com/shibing624/companyparser.git
-cd companyparser
+git clone https://github.com/shibing624/companynameparser.git
+cd companynameparser
 python setup.py install
 ```
 通过以上两种方法的任何一种完成安装都可以。如果不想安装，可以下载github源码包，安装下面依赖再使用。
@@ -27,13 +27,13 @@ python setup.py install
 - Extract Company Name
 
 ```python
-import companyparser
+import companynameparser
 
 company_strs = ["泉州益念食品有限公司",
                 "武汉蓝天医院",
                 "武汉海明智业电子商务有限公司",
                 ]
-df = companyparser.parse(company_strs)
+df = companynameparser.parse(company_strs)
 print(df)
 ```
 
@@ -54,9 +54,9 @@ output:
 
 支持批量提取地址的省市区信息：
 ```
-python3 -m companyparser company_demo.txt -o out.csv
+python3 -m companynameparser company_demo.txt -o out.csv
 
-usage: python3 -m companyparser [-h] -o OUTPUT input
+usage: python3 -m companynameparser [-h] -o OUTPUT input
 @description:
 
 positional arguments:
