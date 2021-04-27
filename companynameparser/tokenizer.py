@@ -47,6 +47,10 @@ def segment(sentence, cut_type='word', pos=False):
             return list(sentence)
 
 
+def jieba_tokenize(sentence):
+    return jieba.tokenize(sentence)
+
+
 class Tokenizer(object):
     def __init__(self, dict_path='', custom_word_freq_dict=None, custom_confusion_dict=None):
         self.model = jieba
@@ -105,3 +109,4 @@ if __name__ == '__main__':
     print('deault', t.tokenize(text, 'default'))
     print('search', t.tokenize(text, 'search'))
     print('ngram', t.tokenize(text, 'ngram'))
+    print(list(jieba_tokenize(text)))

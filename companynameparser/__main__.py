@@ -15,10 +15,9 @@ def parse(names):
     :return: list of place, brand, trade, suffix
     """
     result = []
-    df = companynameparser.parse(names)
-
-    for map_key in zip(df["place"], df["brand"], df["trade"], df["suffix"]):
-        result.append('\t'.join([map_key[0], map_key[1], map_key[2], map_key[3]]))
+    for name in names:
+        r = companynameparser.parse(name)
+        result.append('\t'.join([r['place'], r['brand'], r['trade'], r['suffix']]))
     return result
 
 

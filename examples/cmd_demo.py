@@ -7,6 +7,8 @@ import os
 
 import companynameparser
 
+pwd_path = os.path.abspath(os.path.dirname(__file__))
+
 
 def parse(names):
     """
@@ -15,16 +17,14 @@ def parse(names):
     :return: list of place, brand, trade, suffix
     """
     result = []
-    df = companynameparser.parse(names)
-
-    for map_key in zip(df["place"], df["brand"], df["trade"], df["suffix"]):
-        result.append('\t'.join([map_key[0], map_key[1], map_key[2], map_key[3]]))
+    for i in names:
+        r = companynameparser.parse(i)
+        result.append('\t'.join([r['place'], r['brand'], r['trade'], r['suffix']]))
     return result
 
 
-
 if __name__ == '__main__':
-    origin_path = os.path.join(os.path.dirname(__file__), '../tests/company_demo.txt')
+    origin_path = os.path.join(pwd_path, '../companynameparser/data/company_demo.txt')
 
     lines = []
     with open(origin_path, 'r', encoding='utf-8') as f:

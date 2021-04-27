@@ -6,10 +6,8 @@
 
 import os
 
-import pandas as pd
-
 from companynameparser.logger import logger
-from companynameparser.tokenizer import segment
+from companynameparser.tokenizer import jieba_tokenize
 
 pwd_path = os.path.abspath(os.path.dirname(__file__))
 # 地址文件
@@ -97,62 +95,91 @@ class Parser:
             return False
         return True
 
-    def _extract_token(self, words, data_dict):
+    @staticmethod
+    def _extract_token(tokens, data_dict):
         """
         Extract token words
-        :param words: query segmented words
+        :param tokens: query segmented words
+        :param data_dict: dict
         :return: tuple(token, left_words)
         """
-        self.init()
-        res = [w for w in words if w in data_dict]
-        left_words = [w for w in words if w not in res]
+        res = []
+        left_words = []
+        for w, p, q in tokens:
+            if w in data_dict:
+                res.append((w, p, q))
+            else:
+                left_words.append((w, p, q))
         return res, left_words
 
-    def _extract_brand(self, words):
+    @staticmethod
+    def _extract_brand(words):
         """
         Extract Company name brand words
         :param words: query segmented words
         :return: tuple(brand, left_words)
         """
-        self.init()
-        return words
+        return link_near_words(words)
 
-    def parse_one(self, name):
+    def parse(self, name, pos_sensitive=False):
+        """
+        Parse One Record
+        :param name: Company name
+        :param pos_sensitive: if True, Output position index; default False
+        :return: dict
+        """
         name = name.strip()
-        res = {'input': name, 'place': '', 'brand': '', 'trade': '', 'suffix': '', 'symbol': ''}
+        res = {'place': '', 'brand': '', 'trade': '', 'suffix': '', 'symbol': ''}
         # English company name
         if not name or self.is_english_char(name[0]):
             return res
 
         self.init()
-        words = segment(name, pos=False, cut_type='word')
+        # tokens: [(word, start_index, end_index), ...]
+        tokens = jieba_tokenize(name)
 
-        symbols, left_words = self._extract_token(words, self.symbols)
+        symbols, left_words = self._extract_token(tokens, self.symbols)
         places, left_words = self._extract_token(left_words, self.places)
         suffixes, left_words = self._extract_token(left_words, self.suffixes)
         trades, left_words = self._extract_token(left_words, self.trades)
         brands = self._extract_brand(left_words)
-        res['place'] = ','.join(places)
-        res['brand'] = ''.join(brands)
-        res['trade'] = ''.join(trades)
-        res['suffix'] = ','.join(suffixes)
-        res['symbol'] = ','.join(symbols)
+        # Pos Sensitive Enable
+        res['place'] = places if pos_sensitive else ','.join([w[0] for w in places])
+        res['brand'] = brands if pos_sensitive else ','.join([w[0] for w in brands])
+        res['trade'] = trades if pos_sensitive else ','.join([w[0] for w in trades])
+        res['suffix'] = suffixes if pos_sensitive else ','.join([w[0] for w in suffixes])
+        res['symbol'] = symbols if pos_sensitive else ','.join([w[0] for w in symbols])
 
         return res
 
-    def parse(self, names):
-        """
-        Parse Company Names
-        :param names:
-        :return: DataFrame
-        """
-        result = pd.DataFrame([self.parse_one(name) for name in names])
-        return result
+
+def link_near_words(tokens):
+    new_tokens = []
+    if not tokens:
+        return new_tokens
+    i = 0
+    w, p, q = tokens[i]
+    while i < len(tokens):
+        i += 1
+        if i == len(tokens):
+            new_tokens.append((w, p, q))
+        else:
+            w_i, p_i, q_i = tokens[i]
+            # next word near before word
+            if p_i == q:
+                w = w + w_i
+                p = p
+                q = q_i
+            else:
+                new_tokens.append((w, p, q))
+                w, p, q = tokens[i]
+    return new_tokens
 
 
 if __name__ == '__main__':
     m = Parser()
     a = [
+        "武汉海明智业电子商务有限公司志林123兄妹北京分公司",
         "灵动生物科技（舟山）有限公司（北京）分公司",
         "北京华颜健康咨询有限公司",
         "南通市崇川区百媚美容生活馆",

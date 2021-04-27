@@ -11,4 +11,3 @@ __version__ = "0.1.1"
 
 np = Parser()
 parse = np.parse
-parse_one = np.parse_one
