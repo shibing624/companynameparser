@@ -17,6 +17,7 @@
 from companynameparser import parser
 
 a = [
+    "徐州九州通医药公司",
     "合肥经济技术开发区妍丽雅服装店",
     "西咸新区沣东新城未科诚百货店",
     "信阳市羊山新区沐香干果食品店",
@@ -56,13 +57,14 @@ def load_file(file_path):
 if __name__ == '__main__':
     bug_file = 'bug_0425.txt'
     b = load_file(bug_file)
-    a = a + b
+    # a = a + b
+    a = a
     m = parser.Parser()
-    df = m.parse(a)
-    for p, i, b, t, s in zip(a, df['place'], df['brand'], df['trade'], df['suffix']):
-        print(p, i, b, t, s)
+    for i in a:
+        r = m.parse(i)
+        print(i, r['place'], r['brand'], r['trade'], r['suffix'])
 
     print()
-    df = m.parse(a, pos_sensitive=True)
-    for p, i, b, t, s in zip(a, df['place'], df['brand'], df['trade'], df['suffix']):
-        print(p, i, b, t, s)
+    for i in a:
+        r = m.parse(i, pos_sensitive=True)
+        print(i, r['place'], r['brand'], r['trade'], r['suffix'])

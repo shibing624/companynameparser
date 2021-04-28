@@ -10,10 +10,10 @@ import jieba
 pwd_path = os.path.abspath(os.path.dirname(__file__))
 
 
-def test_cut():
+def test_cut1():
     """切词"""
     location_str = [
-        "上海市浦东新区东方路1365号5号楼24B",
+        "徐州九州通医药公司",
     ]
     for i in location_str:
         o = jieba.lcut(i)
@@ -68,3 +68,7 @@ def test_cut_custom_dict():
     for i in location_str:
         o = jieba.lcut(i)
         print(i, o)
+
+
+if __name__ == '__main__':
+    test_cut1()

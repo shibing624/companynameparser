@@ -3,8 +3,10 @@
 @author:XuMing(xuming624@qq.com)
 @description: 
 """
-from companynameparser import parser
 import os
+
+from companynameparser import parser
+
 company_name_file = 'Company-Names-Corpus-480W-shuf.txt'
 organ_name_file = 'Organization-Names-Corpus-110w-shuf.txt'
 domain_name_file = '../data/company_demo.txt'
@@ -32,20 +34,36 @@ def main():
 
     # c = c3 + c1
     c = c3
-    m = parser.Parser()
+
+    predict_file = 'brand_train.txt'
     horizontal_file = 'hor_train.txt'
     vertical_file = 'ver_train.txt'
-
-    horizontal_bio(m, c, horizontal_file)
+    # predict, output brand name
+    predict_tags(c, predict_file)
+    # to bio
+    horizontal_bio(predict_file, horizontal_file)
+    # to vertical bio
     vertical_bio(horizontal_file, vertical_file)
 
 
-def horizontal_bio(model, input_list, horizontal_file):
-    with open(horizontal_file, 'w', encoding='utf-8') as fw:
+def predict_tags(input_list, predict_file):
+    model = parser.Parser()
+    with open(predict_file, 'w', encoding='utf-8') as f:
+        for line in input_list:
+            r = model.parse(line, pos_sensitive=False)
+            b = r['brand']
+            f.write(line +'\t' + b + '\n')
+
+
+def horizontal_bio(predict_result_file, horizontal_file):
+    with open(predict_result_file, 'r', encoding='utf-8') as fr, open(horizontal_file, 'w', encoding='utf-8') as fw:
         # for i, p, b, t, s, sy in zip(c, df['place'], df['brand'], df['trade'], df['suffix'], df['symbol']):
-        for i in input_list:
-            r = model.parse(i, pos_sensitive=False)
-            b = r['brand'].split(",")[0]
+        for line in fr:
+            line = line.strip()
+            terms = line.split("\t")
+            i = terms[0]
+            b = terms[1].split(',')[0]
+
             if not b:
                 continue
             brand_idx = i.index(b)
@@ -59,7 +77,6 @@ def horizontal_bio(model, input_list, horizontal_file):
             else:
                 out = ' '.join(['O'] * len(i))
             fw.write(i + '\t' + out + '\n')
-            print(i + '\t' + ' '.join([r['place'], r['brand'], r['trade'], r['suffix']]))
             print(i + '\t' + out)
 
 
