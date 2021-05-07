@@ -38,4 +38,4 @@ if __name__ == "__main__":
         chars = terms[0]
         tags = terms[1].split(" ")
         chunks = get_entity_from_bio(list(chars), tags)
-        print(chars, " ".join(chunks))
+        print(chars + " " + " ".join(chunks))
