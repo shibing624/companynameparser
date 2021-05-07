@@ -197,6 +197,6 @@ if __name__ == '__main__':
         "成都锤子科技有限公司",
         "上海览康贸易有限公司",
     ]
-    w = m.parse(a)
-    print(a)
-    print(w)
+    for i in a:
+        w = m.parse(i)
+        print(i, w)

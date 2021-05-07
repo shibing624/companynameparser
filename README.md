@@ -1,4 +1,10 @@
 # companynameparser
+[![PyPI version](https://badge.fury.io/py/companynameparser.svg)](https://badge.fury.io/py/companynameparser)
+[![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![License Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+![Language](https://img.shields.io/badge/Language-Python-blue.svg)
+![Python3](https://img.shields.io/badge/Python-3.X-red.svg)
+
 company name parser, extract company name brand. 中文公司名称分词工具，支持公司名称中的地名，品牌名（主词），行业词，公司名后缀提取。
 
 # Feature
@@ -29,24 +35,25 @@ python setup.py install
 ```python
 import companynameparser
 
-company_strs = ["泉州益念食品有限公司",
-                "武汉蓝天医院",
-                "武汉海明智业电子商务有限公司",
-                ]
-df = companynameparser.parse(company_strs)
-print(df)
+company_strs = [
+    "武汉海明智业电子商务有限公司",
+    "泉州益念食品有限公司",
+    "武汉蓝天医院",
+]
+for i in company_strs:
+    r = companynameparser.parse(i)
+    print(r)
 ```
 
 output:
 ```
-            input place brand trade suffix symbol
-0      泉州益念食品有限公司    泉州    益念    食品   有限公司
-1          武汉蓝天医院    武汉    蓝天           医院
-2  武汉海明智业电子商务有限公司    武汉  海明智业  电子商务   有限公司
+{'place': '武汉', 'brand': '海明智业', 'trade': '电子商务', 'suffix': '有限公司', 'symbol': ''}
+{'place': '泉州', 'brand': '益念', 'trade': '食品', 'suffix': '有限公司', 'symbol': ''}
+{'place': '武汉', 'brand': '蓝天', 'trade': '', 'suffix': '医院', 'symbol': ''}
 ```
-> 程序的此处输入`company_strs`可以是任意的可迭代类型，如list，tuple，set，pandas的Series类型等;
+> 程序的此处输入`company_strs`可以是任意的可迭代类型，如list，tuple，set类型等;
 
-> 输出的`df`是一个Pandas的DataFrame类型变量，DataFrame可以非常轻易地转化为csv或者excel文件，Pandas的官方文档：http://pandas.pydata.org/pandas-docs/version/0.20/dsintro.html#dataframe
+> 输出的是一个dict。
 
 
 ## Command line usage

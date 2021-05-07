@@ -3,7 +3,9 @@
 @author:XuMing(xuming624@qq.com)
 @description: 
 """
+import sys
 
+sys.path.append('..')
 import companynameparser
 
 if __name__ == '__main__':
