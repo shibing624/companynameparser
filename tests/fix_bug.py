@@ -3,7 +3,7 @@
 @author:XuMing(xuming624@qq.com)
 @description: 
 """
-
+# 河北新合作网络科技有限公司
 # 兰州壹玖壹玖电子商务有限公司 壹玖壹
 # 北京华颜健康咨询有限公司 北京华
 # 河北新合作网络科技有限公司 新
@@ -17,6 +17,7 @@
 from companynameparser import parser
 
 a = [
+    "河北新合作网络科技有限公司",
     "徐州九州通医药公司",
     "合肥经济技术开发区妍丽雅服装店",
     "西咸新区沣东新城未科诚百货店",
@@ -36,7 +37,7 @@ a = [
     "北新合作网络科技有限公司",
     "波澜格网络科技有限公司常州第一分公司",
     " 淮安迈捷生物科技有限公司",
-    "河北新合作网络科技有限公司",
+
     "南京佰达隆电子科技有限公司",
     "成都锤子科技有限公司",
     "上海览康贸易有限公司",
@@ -49,22 +50,22 @@ def load_file(file_path):
     subs = []
     with open(file_path, 'r', encoding='utf-8') as fr:
         for line in fr:
-            i = line.strip()
+            i = line.strip().split()[0]
             subs.append(i)
     return subs
 
 
 if __name__ == '__main__':
-    bug_file = 'bug_0425.txt'
-    b = load_file(bug_file)
-    # a = a + b
-    a = a
+    bug_input_file = 'bug_0508.txt'
+    b = load_file(bug_input_file)
+    a = a + b
+    # a = a
     m = parser.Parser()
     for i in a:
         r = m.parse(i)
-        print(i, r['place'], r['brand'], r['trade'], r['suffix'])
+        print(i, r['brand'])
 
     print()
     for i in a:
-        r = m.parse(i, pos_sensitive=True)
+        r = m.parse(i)
         print(i, r['place'], r['brand'], r['trade'], r['suffix'])
