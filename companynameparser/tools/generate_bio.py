@@ -71,7 +71,7 @@ def vertical_bio(horizontal_file, out_vertical_file):
 def main():
     domain_name_file = '../data/company_demo.txt'
     # predict_file format: sentence '\t' brand1,brand2
-    predict_file = '../../tests/train.txt'
+    predict_file = 'sentence_brands.txt'
     horizontal_file = 'hor_train.txt'
     vertical_file = 'ver_train.txt'
     c = load_file(domain_name_file, limit_size=10)
