@@ -5,6 +5,21 @@
 """
 import sys
 
+tag_idx = {
+    "B-PER": 0,
+    "I-PER": 1,
+    "B-ORG": 2,
+    "I-ORG": 3,
+    "B-LOC": 4,
+    "I-LOC": 5,
+    "O": 6,
+}
+idx_tag = {idx: tag for tag, idx in tag_idx.items()}
+
+
+def ids_2_tags(ids):
+    return [idx_tag[idx] for idx in ids]
+
 
 def get_entity_from_bio(chars, tags):
     """

@@ -24,7 +24,7 @@ def load_file(file_path, limit_size=20):
         return subs
     with open(file_path, 'r', encoding='utf-8') as fr:
         for line in fr:
-            i = line.strip()
+            i = line.strip().split()[0]
             if i:
                 count += 1
                 subs.append(i)
@@ -36,21 +36,18 @@ def load_file(file_path, limit_size=20):
 def horizontal_bio(predict_result_file, horizontal_file):
     with open(predict_result_file, 'r', encoding='utf-8') as fr, open(horizontal_file, 'w', encoding='utf-8') as fw:
         for line in fr:
-            line = line.strip()
-            terms = line.split("\t")
+            terms = line.split()
             i = terms[0]
-            b = terms[1].split(',')[0]
-
-            if not b:
-                continue
-            brand_idx = i.index(b)
-            if brand_idx > -1:
-                brand_start = brand_idx
-                brand_len = len(b)
-                if brand_len == 1:
-                    continue
-                out = ' '.join(['O'] * brand_start + ['B-ORG'] + ['I-ORG'] * (brand_len - 1) + ['O'] * (
-                        len(i) - brand_start - brand_len))
+            b = terms[1].strip().split(',')[0] if len(terms) == 2 else ''
+            if b:
+                brand_idx = i.index(b)
+                if brand_idx > -1:
+                    brand_start = brand_idx
+                    brand_len = len(b)
+                    if brand_len == 1:
+                        continue
+                    out = ' '.join(['O'] * brand_start + ['B-ORG'] + ['I-ORG'] * (brand_len - 1) + ['O'] * (
+                            len(i) - brand_start - brand_len))
             else:
                 out = ' '.join(['O'] * len(i))
             fw.write(i + '\t' + out + '\n')
@@ -74,7 +71,7 @@ def vertical_bio(horizontal_file, out_vertical_file):
 def main():
     domain_name_file = '../data/company_demo.txt'
     # predict_file format: sentence '\t' brand1,brand2
-    predict_file = 'sentence_brands.txt'
+    predict_file = '../../tests/train.txt'
     horizontal_file = 'hor_train.txt'
     vertical_file = 'ver_train.txt'
     c = load_file(domain_name_file, limit_size=10)

@@ -14,4 +14,4 @@ if __name__ == '__main__':
         r = m.parse(i)
         b = r['brand']
         # print(i + ' ' + r['brand'] + ' ' + r['trade'] + ' ' + r['suffix'])
-        print(i + ' ' + r['brand'])
+        print(i + '\t' + r['brand'])
