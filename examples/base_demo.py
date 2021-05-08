@@ -17,4 +17,5 @@ if __name__ == '__main__':
     for i in company_strs:
         r = companynameparser.parse(i)
         print(r)
+
         print(i, r['place'], r['brand'], r['trade'], r['suffix'])
