@@ -7,6 +7,15 @@
 
 company name parser, extract company name brand. 中文公司名称分词工具，支持公司名称中的地名，品牌名（主词），行业词，公司名后缀提取。
 
+**Contents**
+
+- [Feature](#Feature)
+- [Install](#Install)
+- [Usage](#usage)
+- [Command line usage](#command-line-usage)
+- [Contribute](#contribute)
+- [Reference](#Reference)
+
 # Feature
 
 对公司名文本解析，识别并提取地名、品牌名、行业词、公司名后缀词。
