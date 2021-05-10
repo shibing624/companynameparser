@@ -7,12 +7,12 @@
 
 company name parser, extract company name brand. 中文公司名称分词工具，支持公司名称中的地名，品牌名（主词），行业词，公司名后缀提取。
 
-**Contents**
+**Guide**
 
 - [Feature](#Feature)
 - [Install](#Install)
 - [Usage](#usage)
-- [Command line usage](#command-line-usage)
+- [Command Line Usage](#command-line-usage)
 - [Contribute](#contribute)
 - [Reference](#Reference)
 
@@ -22,9 +22,10 @@ company name parser, extract company name brand. 中文公司名称分词工具�
 
 # Evaluate
 
+运行评估脚本[evaluate_file.py](./tests/evaluate_file.py)，使用预测结果与GroundTruth完成相等才为True的保守评估方法，
 评估结果：
-- 准确率：96.33%
-- 召回率：94.51%
+- 准确率：94.8%
+- 召回率：94.5%
 
 # Install
 
@@ -65,7 +66,7 @@ output:
 > 输出的是一个dict。
 
 
-## Command line usage
+## Command Line Usage
 
 <details>
 <summary>命令行模式</summary>
@@ -86,7 +87,6 @@ optional arguments:
                         the output file path.
 ```
 > 输入文件：`company_demo.txt`；输出文件：`out.csv`，地名、品牌名、行业名、后缀名以`\t`间隔
-
 
 </details>
 
