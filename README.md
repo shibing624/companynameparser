@@ -42,7 +42,7 @@ python setup.py install
 
 - Extract Company Name
 
-公司名称识别基本功能[base_demo.py](./examples/base_demo.py)
+公司名称各元素提取功能[base_demo.py](./examples/base_demo.py)
 
 ```python
 import companynameparser
@@ -121,7 +121,7 @@ output:
 {'place': '常州,合肥', 'brand': '途畅', 'trade': '互联网科技', 'suffix': '有限公司,分公司', 'symbol': ''}
 {'place': '昆明', 'brand': '享亚', 'trade': '教育信息咨询', 'suffix': '有限公司', 'symbol': ''}
 {'place': '深圳光明', 'brand': '区三晟', 'trade': '', 'suffix': '股份有限公司', 'symbol': ''}
-******************************************  enable split
+******************************************  enable word segment
 {'place': '武汉', 'brand': '海明智业', 'trade': '电子商务', 'suffix': '有限公司', 'symbol': ''}
 {'place': '泉州', 'brand': '益念', 'trade': '食品', 'suffix': '有限公司', 'symbol': ''}
 {'place': '常州,合肥', 'brand': '途畅', 'trade': '互联网,科技', 'suffix': '有限公司,分公司', 'symbol': ''}
