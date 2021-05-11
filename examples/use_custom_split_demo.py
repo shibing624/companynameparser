@@ -16,6 +16,7 @@ if __name__ == '__main__':
         "山西安健堂健康管理有限公司",
         "西咸新区沣东新城未科诚百货店",
         "昆明享亚教育信息咨询有限公司",
+        "北京华颜健康咨询有限公司",
     ]
     for i in company_strs:
         r = companynameparser.parse(i)

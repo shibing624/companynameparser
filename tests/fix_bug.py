@@ -13,10 +13,14 @@
 # 常州途畅互联网科技有限公司合肥分公司 途畅互联
 # 钟楼区北港可诺丹婷美容院 北港可诺
 # 南京市江北新区春之燕美容店 江北新区
+import os
+import sys
 
+sys.path.append('..')
 from companynameparser import parser
 
 a = [
+    "佛山市禅城区百福具臻百货贸易行",
     "深圳光明区三晟电子商务中心",
     "嘉兴市秀洲区洪合镇韵安服装厂",
     "兴仁市薏仁源农产品销售店",
@@ -55,22 +59,24 @@ a = [
     "上海览康贸易有限公司",
     "兰州壹玖壹玖电子商务有限公司",
     "北京华颜健康咨询有限公司",
+    "洛阳市伊滨区小胖墩商贸行",
 ]
 
 
 def load_file(file_path):
     subs = []
-    with open(file_path, 'r', encoding='utf-8') as fr:
-        for line in fr:
-            i = line.strip().split()[0]
-            subs.append(i)
+    if file_path and os.path.exists(file_path):
+        with open(file_path, 'r', encoding='utf-8') as fr:
+            for line in fr:
+                i = line.strip().split()[0]
+                subs.append(i)
     return subs
 
 
 if __name__ == '__main__':
     bug_input_file = 'bug_0508.txt'
     b = load_file(bug_input_file)
-    a = a + b
+    # a = a + b
     m = parser.Parser()
     for i in a:
         r = m.parse(i)

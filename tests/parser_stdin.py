@@ -4,6 +4,7 @@
 @description: 
 """
 import sys
+
 sys.path.append('..')
 from companynameparser import parser
 

@@ -3,11 +3,10 @@
 @author:XuMing(xuming624@qq.com)
 @description: 
 """
-import os
-
-import jieba
 
 import sys
+
+import jieba
 
 
 def cut_stdin():
@@ -16,7 +15,6 @@ def cut_stdin():
         i = line.strip()
         r = jieba.lcut(i)
         print(r[-1])
-
 
 
 if __name__ == '__main__':
