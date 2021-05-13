@@ -107,7 +107,7 @@ class Parser:
             with open(file_path, 'r', encoding='utf-8') as f:
                 for line in f:
                     line = line.strip()
-                    terms = line.split(' ')
+                    terms = line.split(',')
                     if line.startswith('#') or len(terms) <= 1:
                         continue
                     # Company_name place brand trade suffix symbol

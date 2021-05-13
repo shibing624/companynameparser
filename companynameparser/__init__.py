@@ -7,7 +7,7 @@
 from companynameparser import parser
 from companynameparser.parser import Parser
 
-__version__ = "0.1.5"
+__version__ = "0.1.6"
 
 np = Parser()
 parse = np.parse

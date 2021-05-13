@@ -26,7 +26,7 @@ def parse(names):
 
 
 if __name__ == '__main__':
-    origin_path = os.path.join(pwd_path, '../companynameparser/data/company_demo.txt')
+    origin_path = os.path.join(pwd_path, '../tests/company_demo.txt')
 
     lines = []
     with open(origin_path, 'r', encoding='utf-8') as f:
