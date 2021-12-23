@@ -53,7 +53,7 @@ setup(
     packages=find_packages(exclude=['tests']),
     package_dir={'companynameparser': 'companynameparser'},
     package_data={
-        'companynameparser': ['*.*', '../LICENSE', '../*.txt', '../README.*', 'data/*.*'],
+        'companynameparser': ['*.*', '../LICENSE', '../*.txt', '../README.*', 'data/*.*', 'tools/*'],
     },
     test_suite='tests',
 )
