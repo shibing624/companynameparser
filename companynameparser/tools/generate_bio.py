@@ -34,7 +34,8 @@ def load_file(file_path, limit_size=20):
 
 
 def horizontal_bio(predict_result_file, horizontal_file):
-    with open(predict_result_file, 'r', encoding='utf-8') as fr, open(horizontal_file, 'w', encoding='utf-8') as fw:
+    with open(predict_result_file, 'r', encoding='utf-8') as fr, \
+            open(horizontal_file, 'w', encoding='utf-8') as fw:
         for line in fr:
             terms = line.split()
             i = terms[0]
@@ -46,7 +47,8 @@ def horizontal_bio(predict_result_file, horizontal_file):
                     brand_len = len(b)
                     if brand_len == 1:
                         continue
-                    out = ' '.join(['O'] * brand_start + ['B-ORG'] + ['I-ORG'] * (brand_len - 1) + ['O'] * (
+                    out = ' '.join(['O'] * brand_start + ['B-ORG'] +
+                                   ['I-ORG'] * (brand_len - 1) + ['O'] * (
                             len(i) - brand_start - brand_len))
             else:
                 out = ' '.join(['O'] * len(i))
@@ -55,7 +57,8 @@ def horizontal_bio(predict_result_file, horizontal_file):
 
 
 def vertical_bio(horizontal_file, out_vertical_file):
-    with open(horizontal_file, 'r', encoding='utf-8') as fr, open(out_vertical_file, 'w', encoding='utf-8') as fw:
+    with open(horizontal_file, 'r', encoding='utf-8') as fr, \
+            open(out_vertical_file, 'w', encoding='utf-8') as fw:
         for line in fr:
             line = line.strip()
             terms = line.split('\t')
