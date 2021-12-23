@@ -9,6 +9,6 @@ from companynameparser.parser import Parser
 
 __version__ = "0.1.6"
 
-np = Parser()
-parse = np.parse
-set_custom_split_file = np.set_custom_split_file
+par = Parser()
+parse = par.parse
+set_custom_split_file = par.set_custom_split_file
