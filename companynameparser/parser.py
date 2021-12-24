@@ -5,7 +5,7 @@
 """
 
 import os
-
+import time
 from companynameparser.logger import logger
 from companynameparser.tokenizer import jieba_tokenize
 
@@ -65,6 +65,7 @@ class Parser:
 
     def init(self):
         if not self.inited:
+            s = time.time()
             self.places = self.load_dict(self.place_file)
             self.brands = self.load_dict(self.brand_file)
             self.trades = self.load_dict(self.trade_file)
@@ -74,7 +75,7 @@ class Parser:
             self.suffix_single = self.load_dict(self.suffix_single_file)
             self.custom_name_split = self.load_name_split(self.custom_name_split_file)
             self.inited = True
-            logger.debug('dict load ok.')
+            # logger.debug('dict load ok, cost {:.2f} s.'.format(time.time() - s))
 
     def set_custom_split_file(self, file_path):
         self.custom_name_split_file = file_path
@@ -189,42 +190,59 @@ class Parser:
                     w, p, q = tokens[i]
         return new_tokens
 
-    def _extract_brand(self, left_words, places, trades, suffixes):
+    def postprocess(self, left_words, places, brands, trades, suffixes):
         """
         Extract Company name brand words
         :param left_words: query segmented words
         :param places: places
+        :param brands: brands
         :param trades: trades
         :param suffixes: suffixes
-        :return: tuple(brand, left_words)
+        :return: tuple(places, brands, trades, suffixes)
         """
-        brands = []
-        brand_tokens, left_tokens = self._extract_token(left_words, self.brands)
-
         lefts = []
-        for w, p, q in left_tokens:
+        for w, p, q in left_words:
             if len(w) == 1:
-                # Single word
+                # Single char
                 if w in self.trade_single:
-                    trades.append((w, p, q))
+                    if len(left_words) == 2 and len(left_words[0][0]) == 1 and len(
+                            left_words[1][0]) == 1 and not brands:
+                        # 处理："天津曰新塑料制品有限公司"
+                        brands.append((w, p, q))
+                    else:
+                        trades.append((w, p, q))
                 elif w in self.place_single:
                     places.append((w, p, q))
                 elif w in self.suffix_single:
                     suffixes.append((w, p, q))
                 else:
+                    # Left single char, which brand not single char
                     lefts.append((w, p, q))
             else:
                 if w[-1] in self.place_single:
                     places.append((w, p, q))
                 else:
-                    lefts.append((w, p, q))
-        brands.extend(brand_tokens)
-        brands.extend(lefts)
+                    brands.append((w, p, q))
+        if len(lefts) == 1:
+            if len(places) > 1 and places[0][2] == lefts[0][1] and places[1][1] == lefts[0][2]:
+                # 处理："永安市燕南街扶晴梅百货商行"
+                places.extend(lefts)
+            elif len(trades) > 1 and lefts[0][2] == trades[0][1] and not brands:
+                # 处理："中节能秦皇岛环保有限公司"
+                brands.extend(lefts)
+                brands.append(trades[0])
+                trades.remove(trades[0])
+            else:
+                brands.extend(lefts)
+        else:
+            brands.extend(lefts)
+        if len(places) > 1:
+            places.sort(key=lambda k: k[1])
+            places = self.link_near_words(places)  # Deal with link near words
         if len(brands) > 1:
-            # Deal with link near words
             brands.sort(key=lambda k: k[1])
             brands = self.link_near_words(brands)
-        return brands, places, trades, suffixes
+        return places, brands, trades, suffixes
 
     @staticmethod
     def _get_leave_tokens(tokens, start, end):
@@ -291,7 +309,10 @@ class Parser:
             t_places, left_words = self._extract_token(left_words, self.places)
             t_suffixes, left_words = self._extract_token(left_words, self.suffixes)
             t_trades, left_words = self._extract_token(left_words, self.trades)
-            t_brands, t_places, t_trades, t_suffixes = self._extract_brand(left_words, t_places, t_trades, t_suffixes)
+            t_brands, left_words = self._extract_token(left_words, self.brands)
+            # Postprocess
+            t_places, t_brands, t_trades, t_suffixes = self.postprocess(left_words, t_places, t_brands, t_trades,
+                                                                        t_suffixes)
             places.extend(t_places)
             brands.extend(t_brands)
             trades.extend(t_trades)

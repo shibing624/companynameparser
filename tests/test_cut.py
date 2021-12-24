@@ -7,18 +7,19 @@ import os
 import unittest
 
 import jieba
-
+from companynameparser.tokenizer import hanlp_tokenize, jieba_tokenize
 pwd_path = os.path.abspath(os.path.dirname(__file__))
 
 
 class TestCut(unittest.TestCase):
-    def test_cut1(self):
-        """切词"""
+    def test_cut_jieba(self):
+        """jieba切词"""
         location_str = [
             "徐州九州通医药公司",
+            "深圳光明区三晟电子商务中心"
         ]
         for i in location_str:
-            o = jieba.lcut(i)
+            o = jieba_tokenize(i)
             print(o)
 
     def test_cut_with_dict(self):
@@ -48,6 +49,28 @@ class TestCut(unittest.TestCase):
             o = jieba.lcut(i)
             print(i, o)
         os.remove(d_path)
+
+    def test_hanlp(self):
+        import hanlp
+        import os
+        os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+        HanLP = hanlp.load(hanlp.pretrained.mtl.CLOSE_TOK_POS_NER_SRL_DEP_SDP_CON_ELECTRA_SMALL_ZH)  # 世界最大中文语料库
+        HanLP('商品和服务', tasks='tok')
+        HanLP(['2021年HanLPv2.1为生产环境带来次世代最先进的多语种NLP技术。', '阿婆主来到北京立方庭参观自然语义科技公司。'])
+        print(HanLP('商品和服务项目', tasks=['tok/fine',"pos/pku"]))
+        print(HanLP("商品和服务项目")["tok/fine"])
+        print(HanLP(['2021年HanLPv2.1为生产环境带来次世代最先进的多语种NLP技术。', '阿婆主来到北京立方庭参观自然语义科技公司。']))
+
+    def test_cut_hanlp(self):
+        """hanlp切词"""
+        location_str = [
+            "徐州九州通医药公司",
+            "深圳光明区三晟电子商务中心",
+            "佛山市立业思医疗用品有限公司"
+        ]
+        for i in location_str:
+            o = hanlp_tokenize(i)
+            print(o)
 
 
 if __name__ == '__main__':

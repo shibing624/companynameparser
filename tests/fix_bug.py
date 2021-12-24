@@ -15,13 +15,13 @@
 # 南京市江北新区春之燕美容店 江北新区
 import os
 import sys
-
 sys.path.append('..')
 from companynameparser import parser
 
 a = [
-    "佛山市禅城区百福具臻百货贸易行",
     "深圳光明区三晟电子商务中心",
+    "郑州经济开发区郑和热力公司",
+    "佛山市禅城区百福具臻百货贸易行",
     "嘉兴市秀洲区洪合镇韵安服装厂",
     "兴仁市薏仁源农产品销售店",
     "江苏苏州箱包布塑胶公司",
@@ -76,7 +76,7 @@ def load_file(file_path):
 if __name__ == '__main__':
     bug_input_file = 'bug_0508.txt'
     b = load_file(bug_input_file)
-    # a = a + b
+    a = a + b
     m = parser.Parser()
     for i in a:
         r = m.parse(i)

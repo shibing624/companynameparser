@@ -22,10 +22,10 @@ company name parser, extract company name brand. 中文公司名称分词工具�
 
 # Evaluate
 
-运行评估脚本[evaluate_file.py](./tests/evaluate_file.py)，使用预测结果与GroundTruth完成相等才为True的保守评估方法，
+运行评估脚本[evaluate_file.py](./tests/evaluate_file.py)，使用预测结果与GroundTruth完成相等才为算对的保守评估方法，
 评估结果：
-- 准确率：94.8%
-- 召回率：94.5%
+- 准确率：97.0%
+- 召回率：96.7%
 
 # Install
 

@@ -1,4 +1,4 @@
-#original_name,place,brand,trade,suffix,symbol
+#original_name,place,brand,trade,suffix,symbol 某元素缺失就置空
 光明区三晟,光明区,三晟
 西咸新区沣东新城未科诚,西咸新区沣东新城,未科诚
 山西安健堂,山西,安健堂
