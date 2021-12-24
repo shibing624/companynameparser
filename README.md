@@ -126,7 +126,7 @@ output:
 {'place': '泉州', 'brand': '益念', 'trade': '食品', 'suffix': '有限公司', 'symbol': ''}
 {'place': '常州,合肥', 'brand': '途畅', 'trade': '互联网,科技', 'suffix': '有限公司,分公司', 'symbol': ''}
 {'place': '昆明', 'brand': '享亚', 'trade': '教育,信息,咨询', 'suffix': '有限公司', 'symbol': ''}
-{'place': '深圳,光明', 'brand': '区三晟', 'trade': '', 'suffix': '股份,有限公司', 'symbol': ''}
+{'place': '深圳光明', 'brand': '区三晟', 'trade': '', 'suffix': '股份,有限公司', 'symbol': ''}
 ******************************************  pos sensitive
 {'place': [('武汉', 0, 2)], 'brand': [('海明智业', 2, 6)], 'trade': [('电子商务', 6, 10)], 'suffix': [('有限公司', 10, 14)], 'symbol': []}
 {'place': [('泉州', 0, 2)], 'brand': [('益念', 2, 4)], 'trade': [('食品', 4, 6)], 'suffix': [('有限公司', 6, 10)], 'symbol': []}
@@ -138,14 +138,13 @@ output:
 {'place': [('泉州', 0, 2)], 'brand': [('益念', 2, 4)], 'trade': [('食品', 4, 6)], 'suffix': [('有限公司', 6, 10)], 'symbol': []}
 {'place': [('常州', 0, 2), ('合肥', 13, 15)], 'brand': [('途畅', 2, 4)], 'trade': [('互联网', 4, 7), ('科技', 7, 9)], 'suffix': [('有限公司', 9, 13), ('分公司', 15, 18)], 'symbol': []}
 {'place': [('昆明', 0, 2)], 'brand': [('享亚', 2, 4)], 'trade': [('教育', 4, 6), ('信息', 6, 8), ('咨询', 8, 10)], 'suffix': [('有限公司', 10, 14)], 'symbol': []}
-{'place': [('深圳', 0, 2), ('光明', 2, 4)], 'brand': [('区三晟', 4, 7)], 'trade': [], 'suffix': [('股份', 7, 9), ('有限公司', 9, 13)], 'symbol': []}
+{'place': [('深圳光明', 0, 4)], 'brand': [('区三晟', 4, 7)], 'trade': [], 'suffix': [('股份', 7, 9), ('有限公司', 9, 13)], 'symbol': []}
 ****************************************** use custom name
 {'place': '武汉', 'brand': '海明智业', 'trade': '电子商务', 'suffix': '有限公司', 'symbol': ''}
 {'place': '泉州', 'brand': '益念', 'trade': '食品', 'suffix': '有限公司', 'symbol': ''}
 {'place': '常州,合肥', 'brand': '途畅', 'trade': '互联网科技', 'suffix': '有限公司,分公司', 'symbol': ''}
 {'place': '昆明', 'brand': '享亚', 'trade': '教育信息咨询', 'suffix': '有限公司', 'symbol': ''}
 {'place': '深圳光明区', 'brand': '三晟', 'trade': '', 'suffix': '股份有限公司', 'symbol': ''}
-
 ```
 
 ## Command Line Usage
