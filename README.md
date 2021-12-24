@@ -178,6 +178,33 @@ optional arguments:
 - [ ] 多个行业词提取
 
 
+
+## Contact
+
+- Issue(建议)：[![GitHub issues](https://img.shields.io/github/issues/shibing624/companynameparser.svg)](https://github.com/shibing624/companynameparser/issues)
+- 邮件我：xuming: xuming624@qq.com
+- 微信我：加我*微信号：xuming624*, 进Python-NLP交流群，备注：*姓名-公司名-NLP*
+
+<img src="docs/wechat.jpeg" width="200" />
+
+
+## Citation
+
+如果你在研究中使用了companynameparser，请按如下格式引用：
+
+```latex
+@software{companynameparser,
+  author = {Xu Ming},
+  title = {companynameparser: Company Name parser Tool},
+  year = {2021},
+  url = {https://github.com/shibing624/companynameparser},
+}
+```
+
+## License
+
+**Apache License 2.0**
+
 ## Contribute
 
 项目代码还很粗糙，如果大家对代码有所改进，欢迎提交回本项目
