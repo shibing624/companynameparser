@@ -3,7 +3,7 @@
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![License Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 ![Language](https://img.shields.io/badge/Language-Python-blue.svg)
-![Python3](https://img.shields.io/badge/Python-3.X-red.svg)
+![Python3](https://img.shields.io/badge/Python-3.6-red.svg)
 
 company name parser, extract company name brand. 中文公司名称分词工具，支持公司名称中的地名，品牌名（主词），行业词，公司名后缀提取。
 
@@ -29,7 +29,7 @@ company name parser, extract company name brand. 中文公司名称分词工具�
 
 # Install
 
-- 全自动安装：pip install companynameparser
+- 全自动安装：pip install -U companynameparser
 - 半自动安装：
 ```
 git clone https://github.com/shibing624/companynameparser.git
@@ -173,8 +173,8 @@ optional arguments:
 
 ## Todo
 - [x] 补充中国三级地名，优化地名提取效果
-- [ ] 优化品牌名边界问题
-- [ ] 多个行业词提取
+- [x] 优化品牌名边界问题
+- [x] 多个行业词提取
 
 
 
@@ -210,7 +210,7 @@ optional arguments:
 ，在提交之前，注意以下两点：
 
  - 在`tests`添加相应的单元测试
- - 使用`python setup.py test`来运行所有单元测试，确保所有单测都是通过的
+ - 使用`python -m pytest`来运行所有单元测试，确保所有单测都是通过的
 
 之后即可提交PR。
 

@@ -4,10 +4,9 @@
 @description: 
 """
 
-from companynameparser import parser
 from companynameparser.parser import Parser
 
-__version__ = "0.1.7"
+__version__ = "0.1.8"
 
 par = Parser()
 parse = par.parse

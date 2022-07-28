@@ -33,16 +33,17 @@ class Parser:
     Name Parser for Company Name
     """
 
-    def __init__(self,
-                 place_file=place_path,
-                 brand_file=brand_path,
-                 trade_file=trade_path,
-                 suffix_file=suffix_path,
-                 place_single_file=place_single_path,
-                 trade_single_file=trade_single_path,
-                 suffix_single_file=suffix_single_path,
-                 custom_name_split_file='',
-                 ):
+    def __init__(
+            self,
+            place_file=place_path,
+            brand_file=brand_path,
+            trade_file=trade_path,
+            suffix_file=suffix_path,
+            place_single_file=place_single_path,
+            trade_single_file=trade_single_path,
+            suffix_single_file=suffix_single_path,
+            custom_name_split_file='',
+    ):
         self.name = 'company_name_parser'
         self.place_file = place_file
         self.brand_file = brand_file
@@ -143,12 +144,6 @@ class Parser:
             else:
                 break
         return res
-
-    @staticmethod
-    def is_english_char(ch):
-        if ord(ch) not in (97, 122) and ord(ch) not in (65, 90):
-            return False
-        return True
 
     @staticmethod
     def _extract_token(tokens, data_dict):
@@ -271,8 +266,8 @@ class Parser:
         """
         name = name.strip()
         res = {'place': '', 'brand': '', 'trade': '', 'suffix': '', 'symbol': ''}
-        # English company name
-        if not name or self.is_english_char(name[0]):
+        # Not Chinese company name
+        if (not name) or (not is_chinese(name[0])):
             return res
 
         self.init()
@@ -344,3 +339,23 @@ class Parser:
         res['symbol'] = symbols if pos_sensitive else split_sep.join([w[0] for w in symbols])
 
         return res
+
+
+def is_chinese(uchar):
+    """判断一个unicode是否是汉字"""
+    return '\u4e00' <= uchar <= '\u9fa5'
+
+
+def is_number(uchar):
+    """判断一个unicode是否是数字"""
+    return '\u0030' <= uchar <= '\u0039'
+
+
+def is_alphabet(uchar):
+    """判断一个unicode是否是英文字母"""
+    return '\u0041' <= uchar <= '\u005a' or '\u0061' <= uchar <= '\u007a'
+
+
+def is_other(uchar):
+    """判断是否非汉字，数字和英文字符"""
+    return not (is_chinese(uchar) or is_number(uchar) or is_alphabet(uchar))

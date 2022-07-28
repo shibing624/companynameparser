@@ -1,15 +1,7 @@
 # -*- coding: utf-8 -*-
-
-from __future__ import print_function
-
-import os
 import sys
 
 from setuptools import setup, find_packages
-
-import companynameparser
-
-here = os.path.abspath(os.path.dirname(__file__))
 
 if sys.version_info < (3,):
     sys.exit('Sorry, Python3 is required.')
@@ -25,7 +17,7 @@ with open('requirements.txt', 'r', encoding='utf-8') as f:
 
 setup(
     name='companynameparser',
-    version=companynameparser.__version__,
+    version='0.1.8',
     description='Chinese Company Name Parser and Extraction Tool,Company name Recognition Utilities',
     long_description=readme,
     long_description_content_type='text/markdown',
