@@ -1,9 +1,10 @@
 # companynameparser
 [![PyPI version](https://badge.fury.io/py/companynameparser.svg)](https://badge.fury.io/py/companynameparser)
+[![Downloads](https://pepy.tech/badge/companynameparser)](https://pepy.tech/project/companynameparser)
 [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![License Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-![Language](https://img.shields.io/badge/Language-Python-blue.svg)
 ![Python3](https://img.shields.io/badge/Python-3.6-red.svg)
+[![Wechat Group](http://vlog.sfyc.ltd/wechat_everyday/wxgroup_logo.png?imageView2/0/w/60/h/20)](#Contact)
 
 company name parser, extract company name brand. 中文公司名称分词工具，支持公司名称中的地名，品牌名（主词），行业词，公司名后缀提取。
 
@@ -18,7 +19,7 @@ company name parser, extract company name brand. 中文公司名称分词工具�
 
 # Feature
 
-对公司名文本解析，识别并提取地名、品牌名、行业词、公司名后缀词。
+对公司名文本解析，识别并提取地名（place）、品牌名(brand)、行业词(trade)、公司名后缀词(suffix)。
 
 # Evaluate
 
